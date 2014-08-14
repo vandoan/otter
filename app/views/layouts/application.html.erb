@@ -8,35 +8,31 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
- 
-<div class="navbar navbar-inverse navbar-fixed-top">
-  <div class="navbar-inner">
-    <div class="container">
-      <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </a>
-      <a class="brand" href="#">Meetup</a>
-      <div class="nav-collapse">
-        <ul class="nav">
-          <li><%= link_to "Statuses", statuses_path %></li>
-          <li><%= link_to "Contact Us" %></li>
-          <li><%= link_to "Cart" %></li>
-        </ul>
 
-         <ul> 
-             <% if user_signed_in? %>   foodi: 
-
-               <%= link_to 'Edit profile', edit_user_registration_path, :class => 'navbar-link' %> |
-               <%= link_to "Logout", destroy_user_session_path, method: :delete, :class => 'navbar-link'  %>
-
-         </ul> 
-         <% end %> 
+  <div class="navbar navbar-inverse  navbar-fixed-top">
+    <div class="navbar-inner">
+      <div class="container">
+        <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </a>
+        <a class="brand" href="#">VANDOONA</a>
+          <div class="nav-collapse">
+            <ul class="nav">
+              <li><%= link_to "Statuses", statuses_path %></li>
+              <li><%= link_to "Contact Us" %></li>
+              <li><%= link_to "Cart" %></li>
+            </ul>
+          </div> 
+          <ul class="nav pull-right"> 
+            <%= link_to 'Edit profile', edit_user_registration_path, :class => 'navbar-link, logInLogOut' %> |
+            <%= link_to "Logout", destroy_user_session_path, method: :delete, :class => 'navbar-link, logInLogOut'  %>
+          </ul> 
       </div>
     </div>
   </div>
-</div>
+
 <p class="notice"><%= notice %></p>
 <p class="alert"><%= alert %></p>
 <div class="container-fluid container ">
