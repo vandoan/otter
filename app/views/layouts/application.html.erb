@@ -24,6 +24,15 @@
           <li><%= link_to "Contact Us" %></li>
           <li><%= link_to "Cart" %></li>
         </ul>
+
+         <ul> 
+             <% if user_signed_in? %>   foodi: 
+
+               <%= link_to 'Edit profile', edit_user_registration_path, :class => 'navbar-link' %> |
+               <%= link_to "Logout", destroy_user_session_path, method: :delete, :class => 'navbar-link'  %>
+
+         </ul> 
+         <% end %> 
       </div>
     </div>
   </div>
