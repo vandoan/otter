@@ -6,7 +6,8 @@
 
   <% @statuses.each do |status| %> 
     <div class="status"> 
-      <p> <%=status.content %> </p> 
+
+      <p> <%= status.content %> </p> 
       <div clas="meta"> 
         <%= link_to time_ago_in_words(status.created_at) + " ago", status %>
         <span class="admin"> 

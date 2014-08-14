@@ -26,6 +26,7 @@ class StatusesController < ApplicationController
   def create
     @status = Status.new(status_params)
 
+
     respond_to do |format|
       if @status.save
         format.html { redirect_to @status, notice: 'Status was successfully created.' }
@@ -69,6 +70,6 @@ class StatusesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def status_params
-      params.require(:status).permit(:name, :content)
+      params.require(:status).permit(:name, :content, :first_name, :last_name, :profile_name, user_attributes: [:first_name])
     end
 end
