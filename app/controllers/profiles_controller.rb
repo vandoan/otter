@@ -3,7 +3,7 @@ class ProfilesController < ApplicationController
   	@user = User.find_by_profile_name(params[:id])
   	if @user
   		@status = Status.all
-  		#{should be @statuses = @user.statuses.all, but broken }
+  		#{should be @statuses = @user.statuses.all, but broken, scoping issue }
 
   		render action: :show 
   	else 
