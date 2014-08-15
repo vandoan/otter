@@ -5,7 +5,6 @@ class ProfilesController < ApplicationController
   		@status = Status.all
   		#{should be @statuses = @user.statuses.all, but broken }
 
-
   		render action: :show 
   	else 
   		render file: 'public/404', status: 404, formats: [:html]

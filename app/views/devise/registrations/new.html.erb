@@ -7,14 +7,18 @@
 	<%= f.text_field :first_name %></div> 
 	<div> <%= f.label :last_name %><br /> 
 	<%= f.text_field :last_name %></div> 
-		<div> <%= f.label :profile_name %><br /> 
+	<div> <%= f.label :profile_name %><br /> 
 	<%= f.text_field :profile_name %></div> 
+  <div> <%= f.label :favorite_books %><br /> 
+  <%= f.text_field :favorite_books %></div> 
 
   <div class="form-inputs">
     <%= f.input :email, required: true, autofocus: true %>
     <%= f.input :password, required: true %>
     <%= f.input :password_confirmation, required: true %>
   </div>
+
+
 
   <div class="form-actions">
     <%= f.button :submit, "Sign up" %>
