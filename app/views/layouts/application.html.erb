@@ -26,8 +26,15 @@
             </ul>
           </div> 
           <ul class="nav pull-right"> 
-            <%= link_to 'Edit profile', edit_user_registration_path, :class => 'navbar-link, logInLogOut' %> |
-            <%= link_to "Logout", destroy_user_session_path, method: :delete, :class => 'navbar-link, logInLogOut'  %>
+            <% if user_signed_in? %> 
+               <%= link_to current_user.full_name %>  <br /> 
+                  <%= link_to 'Edit profile', edit_user_registration_path, :class => 'navbar-link, logInLogOut' %> |
+                  <%= link_to "Logout", destroy_user_session_path, method: :delete, :class => 'navbar-link, logInLogOut'  %>
+            <% else %> 
+                  <%= link_to "Register", new_user_registration_path %> |
+                  <%= link_to "Log in", new_user_session_path %>   
+
+              <% end %> 
           </ul> 
       </div>
     </div>
