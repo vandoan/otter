@@ -20,7 +20,7 @@
         <a class="brand" href="#">VANDOONA</a>
           <div class="nav-collapse">
             <ul class="nav">
-              <li><%= link_to "Statuses", statuses_path %></li>
+              <li><%= link_to "All Statuses", feed_path %></li>
               <li><%= link_to "Contact Us" %></li>
               <li><%= link_to "Cart" %></li>
             </ul>
@@ -28,11 +28,12 @@
           <ul class="nav pull-right"> 
             <% if user_signed_in? %> 
                <%= link_to current_user.full_name %>  <br /> 
-                  <%= link_to 'Edit profile', edit_user_registration_path, :class => 'navbar-link, logInLogOut' %> |
-                  <%= link_to "Logout", destroy_user_session_path, method: :delete, :class => 'navbar-link, logInLogOut'  %>
+                  
+                  <%= link_to 'Edit profile', edit_path, :class => 'navbar-link, logInLogOut' %> |
+                  <%= link_to "Logout", logout_path, :class => 'navbar-link, logInLogOut'  %>
             <% else %> 
-                  <%= link_to "Register", new_user_registration_path %> |
-                  <%= link_to "Log in", new_user_session_path %>   
+                  <%= link_to "Register", register_path %> |
+                  <%= link_to "Log in", login_path %>   
 
               <% end %> 
           </ul> 
