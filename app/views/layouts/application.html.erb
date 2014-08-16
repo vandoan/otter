@@ -8,60 +8,104 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
-
-  <div class="navbar navbar-inverse  navbar-fixed-top">
-    <div class="navbar-inner">
-      <div class="container">
-        <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-        </a>
-        <a class="brand" href="#">VANDOONA</a>
-          <div class="nav-collapse">
-            <ul class="nav">
-              <li><%= link_to "All Statuses", feed_path %></li>
-              <li><%= link_to "My Profile", profile_path(current_user.profile_name)   %></li>
-              <li><%= link_to "^__^" %></li>
-            </ul>
-          </div> 
-          <ul class="nav pull-right"> 
-            <% if user_signed_in? %> 
-               <%= link_to current_user.full_name %>  <br /> 
-                  
-                  <%= link_to 'Edit profile', edit_path, :class => 'navbar-link, logInLogOut' %> |
-                  <%= link_to "Logout", logout_path, :class => 'navbar-link, logInLogOut'  %>
-            <% else %> 
+    <!-- Sidebar -->
+  <div id='wrapper'>
+    <div id="sidebar-wrapper">
+        <ul class="sidebar-nav">
+            <li class="sidebar-brand">
+                <a href="#">
+                    Start Bootstrap
+                </a>
+            </li>
+            <li>
+                <a href="#">Dashboard</a>
+            </li>
+            <li>
+                <a href="#">Shortcuts</a>
+            </li>
+            <li>
+                <a href="#">Overview</a>
+            </li>
+            <li>
+                <a href="#">Events</a>
+            </li>
+            <li>
+                <a href="#">About</a>
+            </li>
+            <li>
+                <a href="#">Services</a>
+            </li>
+            <li>
+                <a href="#">Contact</a>
+            </li>
+        </ul>
+      </div>
+  
+  <!-- /#sidebar-wrapper -->
+    <div id="page-content-wrapper">
+      <div class="container-fluid">      
+        <div class="navbar navbar-inverse  navbar-fixed-top">
+        <div class="navbar-inner">
+          <div class="container">
+            <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </a>
+            <a class="brand" href="#">VANDOONA</a>
+              <div class="nav-collapse">
+                <ul class="nav">
+                  <li><%= link_to "All Posts", feed_path %></li>
+                  <% if user_signed_in? %> 
+                  <li><%= link_to "My Profile", profile_path(current_user.profile_name)   %></li>
+                  <% end %> 
+                  <li><%= link_to "^__^" %></li>
+                </ul>
+              </div> 
+              <ul class="nav pull-right"> 
+                <% if user_signed_in? %> 
+                   <%= link_to current_user.full_name %>  <br /> 
+                      
+                      <%= link_to 'Edit profile', edit_path, :class => 'navbar-link, logInLogOut' %> |
+                      <%= link_to "Logout", logout_path, :class => 'navbar-link, logInLogOut'  %>
+                <% else %> 
                   <%= link_to "Register", register_path %> |
                   <%= link_to "Log in", login_path %>   
-
-              <% end %> 
-          </ul> 
+                    <% end %> 
+              </ul> 
+          </div>
+        </div>
       </div>
-    </div>
-  </div>
+      <div class=" container">
+        <% flash.each do |type, message| %> 
+          <div class="alert <%= flash_class(type) %>"> 
+            <button class="close" data-dismiss="alert">x</button> 
+            <%= message %>
+          </div>  
+        <% end %>
 
-
- <div class=" container">
-  <% flash.each do |type, message| %> 
-    <div class="alert <%= flash_class(type) %>"> 
-      <button class="close" data-dismiss="alert">x</button> 
-      <%= message %>
-    </div>  
-  <% end %>
-
-
-
-
-      <%= yield %>
- </div> 
-  <div class = "navbar  navbar-fixed-bottom"> 
-     <div class= "navbar-inner">
-     <div class="container"> 
-      <p class = "navbar-text pull-left"> A vandoona project design </p> 
-      <a href="https://github.com/vandoan" class ="navbar-btn btn-danger btn pull-right"> Github</a> 
-    </div> 
+              <a href="#menu-toggle" class="btn btn-default" id="menu-toggle">Toggle Menu</a></li>
+              <%= yield %>
+         
+        </div> 
+          <div class = "navbar  navbar-fixed-bottom"> 
+             <div class= "navbar-inner">
+             <div class="container"> 
+              <p class = "navbar-text pull-left"> a vandoona-project design </p> 
+              <a href="https://github.com/vandoan" class ="navbar-btn btn-danger btn pull-right"> Github</a> 
+          </div> 
+       </div> 
+     </div> 
   </div> 
 </div> 
-</body>
+</div> 
+
+    <script>
+    $("#menu-toggle").click(function(e) {
+        e.preventDefault();
+        $("#wrapper").toggleClass("toggled");
+    });
+    </script>
+    
+  </body>
 </html>

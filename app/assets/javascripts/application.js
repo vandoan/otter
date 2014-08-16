@@ -15,3 +15,16 @@
 //= require twitter/bootstrap
 //= require turbolinks
 //= require_tree .
+
+
+// side bar js
+
+
+
+
+function(){
+    $("#menu-toggle").click(function(e) {
+        e.preventDefault();
+        $("#wrapper").toggleClass("toggled");
+    });
+}
