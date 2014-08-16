@@ -1,9 +1,11 @@
 <div class="page-header"> 
 	<div> 
 		<h1><%= @user.full_name %></h1> 
+		<hr /> 
+
 	</div> 
 	<div> 
-		<h4> Favorite Books </h4> 
+		<h3> Favorite Books </h3> 
 		  <p> <%= @user.favorite_books %> </p> 
 	</div>
 </div> 
@@ -16,8 +18,5 @@
 		<%= link_to  time_ago_in_words(status.created_at), status_path(status) %> ago
 		</div>  
 
-		<div class='well'> 
-			<hr /> 
-		</div> 
 	<% end %> 
 <% end %> 

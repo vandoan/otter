@@ -190,6 +190,7 @@ DEPENDENCIES
   coffee-rails (~> 4.0.0)
   devise
   faker
+  guard
   guard-livereload
   jbuilder (~> 2.0)
   jquery-rails
