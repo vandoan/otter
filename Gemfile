@@ -1,5 +1,10 @@
 source 'https://rubygems.org'
 
+gem "annotate" 
+gem "better_errors" 
+gem "pry" 
+gem "faker"
+
 gem 'simple_form'
 gem 'devise' 
 gem 'twitter-bootstrap-rails'
@@ -28,6 +33,7 @@ gem 'sdoc', '~> 0.4.0',          group: :doc
 
 # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
 gem 'spring',        group: :development
+gem 'guard-livereload', group: :development  
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
