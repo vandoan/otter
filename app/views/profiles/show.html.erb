@@ -1,15 +1,14 @@
 <div class="page-header"> 
 	<div> 
 		<h1><%= @user.full_name %></h1> 
-		<hr /> 
-
-	</div> 
+	</div>
+</div>  
 	<div> 
 		<h3> Favorite Books </h3> 
 		  <p> <%= @user.favorite_books %> </p> 
 	</div>
-</div> 
-
+	<div> 
+		<h3> hi, mom. hi, Lee</h3>
 <% if @statuses %> 
 	<% @statuses.each do |status| %>
 		<div class='well'> 
@@ -17,6 +16,7 @@
 		<hr /> 
 		<%= link_to  time_ago_in_words(status.created_at), status_path(status) %> ago
 		</div>  
+	</div> 
 
 	<% end %> 
 <% end %> 
