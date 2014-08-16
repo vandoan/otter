@@ -8,10 +8,7 @@ Things you may want to cover:
 
 
 * Serious Issues
-	Need to fix the association on the show page with teh the user_name variable 
-	Fix the index.html.erb for the user_name as well
-	Line 29 on application.html.erb, fix it:  <%= link_to current_user.full_name, "#", :class => 'userName' %><br> 
-
+	None
 
 
 * Ruby version
