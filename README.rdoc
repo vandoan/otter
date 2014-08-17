@@ -7,8 +7,8 @@ Things you may want to cover:
 
 
 
-* Serious Issues
-	None
+*  To Do List
+	fix the sliding menu so tha it's closed when loading the page
 
 
 * Ruby version

@@ -37,9 +37,11 @@ body{
 
 #wrapper.toggled {
     padding-left: 250px;
+
 }
 
 #sidebar-wrapper {
+
     z-index: 1000;
     position: fixed;
     left: 250px;
@@ -61,6 +63,7 @@ body{
 #page-content-wrapper {
     width: 100%;
     padding: 15px;
+    
 }
 
 #wrapper.toggled #page-content-wrapper {

@@ -16,6 +16,7 @@ class StatusesController < ApplicationController
   # GET /statuses/new
   def new
     @status = Status.new
+    @users = User.all.order('profile_name')
   end
 
   # GET /statuses/1/edit
