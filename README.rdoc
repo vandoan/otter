@@ -11,6 +11,7 @@ Things you may want to cover:
 	-Fix the sliding menu so tha it's closed when loading the page.
 	-Change the Toggle Menu to an icon.
 	-Fix the collection in the drop box in the form page so that it defaults to current user
+	-take gravatar to the next level at https://en.gravatar.com/site/implement/images/
 
 
 
