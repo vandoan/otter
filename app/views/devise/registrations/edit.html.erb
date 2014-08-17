@@ -9,12 +9,16 @@
   <%= f.text_field :profile_name %> 
     <%= f.input :email, required: true, autofocus: true %>
 
-    <div> <%= f.label :favorite_books %>
+  <div> <%= f.label :favorite_books %>
   <%= f.text_field :favorite_books %></div> 
 
-    <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
+
+  <div> <%= f.label :hobbies %><br /> 
+  <%= f.text_field :hobbies %></div> 
+
+  <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
       <p>Currently waiting confirmation for: <%= resource.unconfirmed_email %></p>
-    <% end %>
+   <% end %>
 
     <%= f.input :password, autocomplete: "off", hint: "leave it blank if you don't want to change it", required: false %>
     <%= f.input :password_confirmation, required: false %>

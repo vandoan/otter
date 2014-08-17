@@ -8,7 +8,11 @@ Things you may want to cover:
 
 
 *  To Do List
-	fix the sliding menu so tha it's closed when loading the page
+	-Fix the sliding menu so tha it's closed when loading the page.
+	-Change the Toggle Menu to an icon.
+	-Fix the collection in the drop box in the form page so that it defaults to current user
+
+
 
 
 * Ruby version

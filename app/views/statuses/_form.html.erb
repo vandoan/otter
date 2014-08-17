@@ -1,5 +1,5 @@
 <%= simple_form_for(@status, html: {class: "form-horizontal"}) do |f| %>
-
+<h3> <%= current_user.full_name %> </h3> 
   <% if @status.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@status.errors.count, "error") %> prohibited this status from being saved:</h2>
@@ -11,7 +11,9 @@
       </ul>
     </div>
   <% end %>
-  <%= f.input :user_id, collection: @users , label_method: :full_name   %> 
+  <%= f.input :user_id, collection: @users, selected: current_user, label_method: :full_name, include_blank: false, input: {value: current_user.full_name} %> 
+  <% #another possible code <%= f.input :user_id, collection: User.order(:first_name), selected: current_user, label_method: :full_name %>
+
   <%= f.input :content %> 
     <div class="form-actions">
     <%= f.button :submit %>
