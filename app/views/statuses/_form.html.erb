@@ -11,8 +11,7 @@
       </ul>
     </div>
   <% end %>
-  <%= f.input :user_id, collection: @users, selected: current_user, label_method: :full_name, include_blank: false, input: {value: current_user.full_name} %> 
-  <% #another possible code <%= f.input :user_id, collection: User.order(:first_name), selected: current_user, label_method: :full_name %>
+   <% #another possible code <%= f.input :user_id, collection: User.order(:first_name), selected: current_user, label_method: :full_name %>
 
   <%= f.input :content %> 
     <div class="form-actions">
