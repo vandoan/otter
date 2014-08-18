@@ -4,7 +4,7 @@ gem "annotate"
 gem "better_errors" 
 gem "pry" 
 gem "faker"
-
+gem "shoulda", group: :test 
 
 gem 'simple_form'
 gem 'devise' 
