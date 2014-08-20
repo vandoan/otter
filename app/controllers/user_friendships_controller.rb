@@ -16,6 +16,18 @@ class UserFriendshipsController < ApplicationController
 		render file: 'public/404', status: :not_found
 	end 
 
+	def edit
+		@user_friendship * current_user.user_friendships.find(param[:id])
+		@friend = @user_friendship.friend
+	end 
+
+
+	def destroy
+		@user_friendship = current_user.user_friendships.find(params[:id])
+		if @user_friendship.destroy
+			flash[:success] = "Friendship destoyed", flash[:success]
+		end
+	end 
 	def create
 		if params[:user_friendship] && params[:user_friendship].has_key?[:friend_id]
 			@friend = User.where(profile_name: params[:user_friendship][:friend_id]).first
