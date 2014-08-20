@@ -5,6 +5,8 @@ gem "better_errors"
 gem "pry" 
 gem "faker"
 gem "shoulda", group: :test 
+gem 'factory_girl_rails'
+
 
 gem 'simple_form'
 gem 'devise' 
