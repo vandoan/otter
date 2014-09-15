@@ -1,25 +1,25 @@
 class UserFriendship < ActiveRecord::Base
-  belongs_to :user, :foreign_key => :user_id
+  belongs_to :user
   belongs_to :friend, class_name: 'User', foreign_key: 'friend_id'
 
 
   after_destroy :delete_mutual_friendship!
 
-  state_machine :state, initial: :pending do
-    after_transition on: :accept, do: [:send_acceptance_email, :accept_mutual_friendship!]
-    after_transition on: :block, do: [:block_mutual_friendship!]
+  # state_machine :state, initial: :pending do
+  #   after_transition on: :accept, do: [:send_acceptance_email, :accept_mutual_friendship!]
+  #   after_transition on: :block, do: [:block_mutual_friendship!]
 
-    state :requested
-    state :blocked
+  #   state :requested
+  #   state :blocked
 
-    event :accept do
-      transition any => :accepted
-    end
+  #   event :accept do
+  #     transition any => :accepted
+  #   end
 
-    event :block do
-      transition any => :blocked
-    end
-  end
+  #   event :block do
+  #     transition any => :blocked
+  #   end
+  # end
 
   validate :not_blocked
 
@@ -67,7 +67,7 @@ class UserFriendship < ActiveRecord::Base
   end
 
     def user_friendship_params
-      params.require(:user_friendship).permit(:friend_id, :user_id, :user_friendship, :current_user)
+      params.require(:user_friendship).permit(:friend_id, :user_id, :user_friendship, :user, :friend, :current_user)
     end
 
 
