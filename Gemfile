@@ -1,5 +1,5 @@
 source 'https://rubygems.org'
-
+gem "state_machine"
 gem "annotate" 
 gem "better_errors" 
 gem "pry" 

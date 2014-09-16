@@ -41,6 +41,9 @@
 			*robmclarity.com
 		** make sure when adding white params, add in both application and registration -> show.html.erb
 
+
+	* validation error for state machine solution
+		* https://github.com/pluginaweek/state_machine/issues/251
 		
 
 
