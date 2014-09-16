@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   get 'profiles/show'
 
-  devise_for :users
+  # devise_for :users
   resources :statuses
   resources :user_friendships
 
@@ -17,13 +17,19 @@ as :user do
   get '/edit', to: 'devise/registrations#edit', as: :edit 
 end 
 
+
+
 # creating bugs
-#devise_for  :users, skip: [:sessions]
- # as :user do 
-#    get "/login" => 'devise/sessions#new', as: :new_user_session
- #   post "/login" => 'devise/sessions#create', as: :user_session
-  #  delete "/logout" => 'devise/sessions#destroy', as: :destroy_user_session
- # end 
+ devise_for  :users, skip: [:sessions]
+  as :user do 
+    get "/login", to: 'devise/sessions#new', as: :new_user_session
+    post "/login", to: 'devise/sessions#create', as: :user_session
+    delete "/logout", to:  'devise/sessions#destroy', as: :destroy_user_session
+  end 
+
+
+  resources :user_friendships
+
 
   resources :statues 
   get 'feed', to: 'statuses#index', as: :feed 
