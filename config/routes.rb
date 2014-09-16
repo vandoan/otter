@@ -6,6 +6,11 @@ Rails.application.routes.draw do
   resources :user_friendships
 
 as :user do
+ # get "/login", to: 'devise/sessions#new', as: :new_user_session
+  #post "/login" => 'devise/sessions#create', as: :user_session
+  #delete "/logout" => 'devise/sessions#destory', as: :destroy_user_session
+
+
   get '/register', to: 'devise/registrations#new', as: :register
   get '/login', to: 'devise/sessions#new', as: :login 
   get '/logout', to: 'devise/sessions#destroy', as: :logout 
