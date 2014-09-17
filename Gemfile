@@ -9,6 +9,7 @@ gem "pry"
 gem "faker"
 gem "shoulda", group: :test 
 gem 'factory_girl_rails'
+gem "js-routes"
 
 
 gem 'simple_form'
@@ -18,6 +19,9 @@ gem 'less-rails'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.1.4'
 # Use sqlite3 as the database for Active Record
+
+gem 'bcrypt', '~> 3.1.7'
+
 
 group :development, :test do 
 	gem 'sqlite3'
