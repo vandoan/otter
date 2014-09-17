@@ -1,22 +1,21 @@
 class StatusesController < ApplicationController
+  before_action :authenticate_user!, only: [:new, :create, :update, :edit]  
   before_action :set_status, only: [:show, :edit, :update, :destroy]
 
   # GET /statuses
   # GET /statuses.json
   def index
-    @statuses = Status.order("created_at DESC").all
+    @statuses = Status.all
   end
 
   # GET /statuses/1
   # GET /statuses/1.json
   def show
-
   end
 
   # GET /statuses/new
   def new
     @status = Status.new
-    @users = User.all.order('profile_name')
   end
 
   # GET /statuses/1/edit
@@ -27,7 +26,6 @@ class StatusesController < ApplicationController
   # POST /statuses.json
   def create
     @status = current_user.statuses.new(status_params)
-
 
     respond_to do |format|
       if @status.save
@@ -43,12 +41,11 @@ class StatusesController < ApplicationController
   # PATCH/PUT /statuses/1
   # PATCH/PUT /statuses/1.json
   def update
-    @status = current_user.statuses.find(params[:id])
-      if status[:params] && params[:status].has_key?(:user_id)
-      params[:status].delete(:user_id) 
-      end
+    if params[:status] && params[:status].has_key?(:user_id)
+      params[:status].delete(:user_id)
+    end
+    
     respond_to do |format|
-
       if @status.update(status_params)
         format.html { redirect_to @status, notice: 'Status was successfully updated.' }
         format.json { render :show, status: :ok, location: @status }
@@ -58,6 +55,8 @@ class StatusesController < ApplicationController
       end
     end
   end
+
+
 
 
   # DELETE /statuses/1
@@ -70,14 +69,20 @@ class StatusesController < ApplicationController
     end
   end
 
+
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_status
-      @status = Status.find(params[:id])
+      @status = current_user.statuses.find(params[:id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def status_params
-      params.require(:status).permit(:favorite_books, :hobbies,  :user_id, :name, :content, :first_name, :last_name, :profile_name, :full_name,  users_attributes:[:first_name, :last_name, :hobbies, :profile_name])
+        params.require(:status).permit(:id, :user_id, :content)
+    end
+
+    def has_status_params?
+      params[:status]
     end
 end

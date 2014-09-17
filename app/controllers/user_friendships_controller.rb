@@ -1,83 +1,115 @@
 class UserFriendshipsController < ApplicationController
+  before_filter :authenticate_user!
+  before_action :set_user_friendship, only: [:accept, :destroy]
+  rescue_from ActiveRecord::RecordNotFound, with: :record_not_found
+  respond_to :html, :json
 
-	before_filter :authenticate_user!, only: [:new]
+  def index
+    @user_friendships = UserFriendshipDecorator.decorate_collection(friendship_association.all)
+    respond_with @user_friendships
+  end
 
-def new 
+
+  def new
     if params[:friend_id]
-        @friend = User.where(profile_name: params[:friend_id]).first
-        raise ActiveRecord::RecordNotFound if @friend.nil?
-        @user_friendship = current_user.user_friendships.new(friend: @friend)
+      @friend = User.where(profile_name: params[:friend_id]).first
+      raise ActiveRecord::RecordNotFound if @friend.nil?
+      @user_friendship = current_user.user_friendships.new(friend: @friend)
     else
-        flash[:error] = "Friend required"
+      flash[:error] = "Friend required"
     end
-rescue ActiveRecord::RecordNotFound
-    render file: 'public/404', status: :not_found
-end
-	
+  end
+
+
+  def edit
+    @friend = User.where(profile_name: params[:id]).first   
+    @user_friendship = current_user.user_friendships.where(friend_id: @friend.id).first.decorate
+  end
+
+
+  def create
+    if params[:user_friendship] && params[:user_friendship].has_key?(:friend_id)    
+      @friend = User.where(profile_name: params[:user_friendship][:friend_id]).first
+      @user_friendship = UserFriendship.request(current_user, @friend)
+      respond_to do |format|
+        if @user_friendship.new_record?
+          format.html do
+            flash[:error] = "There was a problem creating that friendship"
+            redirect_to profile_path(@friend)
+          end
+          format.json { render json: @user_friendship.to_json, status: :precondition_failed }
+        else
+          format.html do
+            flash[:success] = "Friend request sent."
+            redirect_to profile_path(@friend)
+          end 
+          format.json { render json: @user_friendship.to_json }       
+        end
+      end
+    else
+      flash[:error] = "Friend required"
+      redirect_to root_path
+    end
+  end
+
+
   def accept
-    @user_friendship = current_user.user_friendships.find(params[:id])
     if @user_friendship.accept!
       flash[:success] = "You are now friends with #{@user_friendship.friend.first_name}"
     else
-      flash[:error] = "That friendship could not be accepted"
+      flash[:success] = "That friendship could not be accepted"
     end
     redirect_to user_friendships_path
   end
 
-	def index 
 
-		@user_friendships = current_user.user_friendships.all
-
-	end 
-
-	def edit
-		@user_friendship * current_user.user_friendships.find(param[:id])
-		@friend = @user_friendship.friend
-	end 
-
-
-	def destroy
-		@user_friendship = current_user.user_friendships.find(params[:id])
-		if @user_friendship.destroy
-			flash[:success] = "Friendship destoyed", flash[:success]
-		end
-	end 
-
-
-	def create
-	#	if params[:friend_id]
-		#	@friend = User.where(profile_name: params[:friend_id]).first
-	 	if params[:user_friendship] && params[:user_friendship].has_key?(:friend_id)
-	 		@friend = User.where(profile_name: params[:user_friendship][:friend_id]).first
-	 		@user_friendship = UserFriendship.request(current_user, @friend)
-	 		# signals the request
-			respond_to do |format|	 		
-		 		@user_friendship.save
-		 		flash[:success] = "You are now friends with #{@friend.first_name}"
-		 		redirect_to profile_path(@friend)
-			 	if @user_friendship = UserFriendship.request(current_user, @friend)
-			 		format.html do 
-			 			flash[:error] = "There was a problem creating that friend request."
-			 			redirect_to profile_path(@friend)
-			 		end 
-			 	else 
-			 		format.html do 
-			 			flash[:success] = "Firend request sent."
-			 			redirect_to profile_path(@friend)
-			 		end 
-			 		format.json { render json: @user_friendship.to_json } 
-			 	end 
-			 end 
-		else
-			flash[:error] = "Friend required" 
-			redirect_to root_path 
-		end 
-	end 
-
- def user_params
-      params.require(:user).permit(:friend, :user_id, :friend_id, :state, :email)
+  def block
+    @user_friendship = current_user.user_friendships.find(params[:id])
+    if @user_friendship.block!
+      flash[:success] = "You have blocked #{@user_friendship.friend.first_name}"
+    else
+      flash[:error] = "That person could not be blocked"
     end
+    redirect_to user_friendships_path
+  end
+
+
+  def destroy
+    if @user_friendship.destroy     
+      flash[:success] = "You are no longer friends"
+    end
+    redirect_to user_friendships_path
+  end
 
 
 
+  private
+
+  def friendship_association
+    case params[:list]
+    when nil
+      current_user.user_friendships
+    when 'blocked'
+      current_user.blocked_user_friendships
+    when 'pending'  
+      current_user.pending_user_friendships
+    when 'accepted'
+      current_user.accepted_user_friendships
+    when 'requested'
+      current_user.requested_user_friendships
+    end 
+  end
+
+  def record_not_found
+    render file: 'public/404', status: :not_found
+  end
+
+  def set_user_friendship
+    @user_friendship = current_user.user_friendships.find(params[:id])
+  end
+
+    # Never trust parameters from the scary internet, only allow the white list through.
+    def user_friendship_params
+        params.require(:user_friendship).permit(:id, :user_id, :friend_id)
+    end
 end

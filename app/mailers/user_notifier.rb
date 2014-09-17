@@ -7,9 +7,10 @@ class UserNotifier < ActionMailer::Base
     @user = user_friendship.user
     @friend = user_friendship.friend
 
-    mail to: @friend.email,
-         subject: "#{@user.first_name} wants to be friends on Treebook"
+    mail  to: @friend.email,
+        subject: "#{@user.first_name} wants to be friends on Treebook!"
   end
+
 
   def friend_request_accepted(user_friendship_id)
     user_friendship = UserFriendship.find(user_friendship_id)
@@ -17,11 +18,7 @@ class UserNotifier < ActionMailer::Base
     @user = user_friendship.user
     @friend = user_friendship.friend
 
-    mail to: @user.email,
-         subject: "#{@friend.first_name} has accepted your friend request."
+    mail  to: @user.email,
+        subject: "#{@friend.first_name} has accepted your friend request!"
   end
-
-      def status_params
-      params.require(:status).permit(:favorite_books, :hobbies,  :user_id, :name, :content, :first_name, :last_name, :profile_name, :full_name, :email, :friend,  users_attributes:[:first_name, :last_name, :hobbies, :profile_name])
-    end
 end
